@@ -1,0 +1,5 @@
+﻿function(add_sources_to_project)
+    cmake_parse_arguments(ARG "" "" SRCS ${ARGN})
+    list(TRANSFORM ARG_SRCS PREPEND ${CMAKE_CURRENT_SOURCE_DIR}/)
+    target_sources(${PROJECT_NAME} PRIVATE ${ARG_SRCS})
+endfunction(add_sources_to_project)
