@@ -10,7 +10,9 @@ set(SRCTEST
     ${SRC_DIR}/ProgramOptions.hpp
     ${SRC_DIR}/ProgramOptions.cpp)
 
-#add_executable(${TARGET} EXCLUDE_FROM_ALL ${SRCTEST})
 add_executable(${TARGET} ${SRCTEST})
 target_include_directories(${TARGET} PRIVATE ${SRC_DIR})
 set_property(TARGET ${TARGET} PROPERTY CXX_STANDARD 17)
+
+add_test(NAME ${TARGET}
+         COMMAND ${TARGET})
