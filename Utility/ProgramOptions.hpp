@@ -5,6 +5,7 @@
 
 namespace CppUtils
 {
+/* Parse argv */
 class ProgramOptions
 {
 public:
