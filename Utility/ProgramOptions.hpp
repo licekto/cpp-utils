@@ -13,7 +13,7 @@ public:
     class UnknownParameterException : std::exception
     {
     public:
-        UnknownParameterException(const std::string& name);
+        explicit UnknownParameterException(const std::string& name);
         const char* what() const noexcept override;
 
     private:
@@ -23,7 +23,7 @@ public:
     class MissingParameterValueException : std::exception
     {
     public:
-        MissingParameterValueException(const std::string& name);
+        explicit MissingParameterValueException(const std::string& name);
         const char* what() const noexcept override;
 
     private:
@@ -33,7 +33,7 @@ public:
     class MissingMandatoryParameterException : std::exception
     {
     public:
-        MissingMandatoryParameterException(const std::string& name);
+        explicit MissingMandatoryParameterException(const std::string& name);
         const char* what() const noexcept override;
 
     private:
