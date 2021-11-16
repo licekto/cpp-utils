@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <optional>
 
+#include <Utility/StringUtils.hpp>
+
 namespace CppUtils
 {
 
@@ -46,11 +48,11 @@ const char* ProgramOptions::MissingParameterValueException::what() const noexcep
     return message.c_str();
 }
 
-ProgramOptions::MissingMandatoryParameterException::MissingMandatoryParameterException(const std::string& name)
-    : message("Missing mandatory '" + name + "' parameter")
+ProgramOptions::MissingMandatoryParametersException::MissingMandatoryParametersException(const std::vector<std::string>& missing)
+    : message("Missing mandatory '" + Combinator(",").Combine(missing) + "' parameter")
 {}
 
-const char* ProgramOptions::MissingMandatoryParameterException::what() const noexcept
+const char* ProgramOptions::MissingMandatoryParametersException::what() const noexcept
 {
     return message.c_str();
 }
@@ -60,7 +62,7 @@ std::ostream& operator<<(std::ostream& os, const ProgramOptions& programOptions)
     os << programOptions.programName << " - " << programOptions.description << "\nOptions:\n";
     for (const auto& parameter : programOptions.parameters)
     {
-        os << parameter;
+        os << parameter << "\n";
     }
     return os;
 }
@@ -147,7 +149,7 @@ void ProgramOptions::Parameter::setValue(const std::string_view valueStr)
 std::ostream& operator<<(std::ostream& os, const ProgramOptions::Parameter& parameter)
 {
     return os << "\t" << parameter.shortName << ", " << parameter.longName
-              << (parameter.isMandatory ? "(mandatory)" : "") << "\n"
+              << (parameter.isMandatory ? " (mandatory)" : "") << "\n"
               << "\t\t" << parameter.description;
 }
 
@@ -161,12 +163,18 @@ ProgramOptions::Parameter* ProgramOptions::getParameter(const std::string_view n
 
 void ProgramOptions::checkMandatoryPresent() const
 {
+    std::vector<std::string> missing;
     for (const auto& parameter : parameters)
     {
         if (parameter.isMandatory && !parameter.populated)
         {
-            throw MissingMandatoryParameterException(parameter.longName);
+            missing.push_back(parameter.longName);
         }
+    }
+
+    if (!missing.empty())
+    {
+        throw MissingMandatoryParametersException(missing);
     }
 }
 }

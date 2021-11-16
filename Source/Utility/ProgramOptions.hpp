@@ -10,7 +10,7 @@ class ProgramOptions
 public:
     enum class ParameterT { String, Double, Int64, Flag };
 
-    class UnknownParameterException : std::exception
+    class UnknownParameterException : public std::exception
     {
     public:
         explicit UnknownParameterException(const std::string& name);
@@ -20,7 +20,7 @@ public:
         std::string message;
     };
 
-    class MissingParameterValueException : std::exception
+    class MissingParameterValueException : public std::exception
     {
     public:
         explicit MissingParameterValueException(const std::string& name);
@@ -30,10 +30,10 @@ public:
         std::string message;
     };
 
-    class MissingMandatoryParameterException : std::exception
+    class MissingMandatoryParametersException : public std::exception
     {
     public:
-        explicit MissingMandatoryParameterException(const std::string& name);
+        explicit MissingMandatoryParametersException(const std::vector<std::string>& missing);
         const char* what() const noexcept override;
 
     private:

@@ -96,7 +96,7 @@ TEST_CASE("ProgramOptions missing mandatory")
     CppUtils::ProgramOptions programOptions;
     programOptions.addDescription("Test program");
     programOptions.addParameter(CppUtils::ProgramOptions::ParameterT::Flag, 'f', "flag", "flag description", true, true, &flagParam);
-    REQUIRE_THROWS_AS(programOptions.parse(argc, argv), CppUtils::ProgramOptions::MissingMandatoryParameterException);
+    REQUIRE_THROWS_AS(programOptions.parse(argc, argv), CppUtils::ProgramOptions::MissingMandatoryParametersException);
 }
 
 TEST_CASE("ProgramOptions unknown parameter")
