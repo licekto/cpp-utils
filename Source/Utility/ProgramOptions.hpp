@@ -5,7 +5,6 @@
 
 namespace CppUtils
 {
-/* Parse argv */
 class ProgramOptions
 {
 public:
@@ -50,6 +49,9 @@ public:
 private:
     struct Parameter
     {
+        Parameter(const Parameter&) = default;
+        Parameter& operator=(const Parameter&) = default;
+
         const ParameterT type;
         const char shortName;
         std::string longName;
@@ -70,8 +72,8 @@ private:
     Parameter* getParameter(const std::string_view name);
     void checkMandatoryPresent() const;
 
-    std::string programName;
-    std::string description;
-    std::vector<Parameter> parameters;
+    std::string programName{};
+    std::string description{};
+    std::vector<Parameter> parameters{};
 };
 }

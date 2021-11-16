@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 set(TARGET "cpp-utils-unittests")
 include(CTest)
 
-set(SRC_DIR ${CMAKE_CURRENT_LIST_DIR}/../Utility)
+set(SRC_DIR ${CMAKE_CURRENT_LIST_DIR}/../Source/Utility)
 
 set(SRCTEST
     ${CMAKE_CURRENT_LIST_DIR}/TestMain.cpp
