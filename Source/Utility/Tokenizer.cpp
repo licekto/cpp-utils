@@ -4,15 +4,15 @@
 
 namespace CppUtils
 {
-Tokenizer::ConstIterator Tokenizer::ConstIterator::create_end(const Tokenizer *tok)
+Tokenizer::ConstIterator Tokenizer::ConstIterator::create_end(const Tokenizer *_tokenizer)
 {
-    ConstIterator it(tok);
+    ConstIterator it(_tokenizer);
     it.current = std::string_view::npos;
     return it;
 }
 
-Tokenizer::ConstIterator::ConstIterator(const Tokenizer *tok) noexcept
-    : tokenizer(tok)
+Tokenizer::ConstIterator::ConstIterator(const Tokenizer *_tokenizer) noexcept
+    : tokenizer(_tokenizer)
     , current(tokenizer->string.find_first_not_of(tokenizer->delims, 0))
     , next(tokenizer->string.find_first_of(tokenizer->delims, current))
 {}

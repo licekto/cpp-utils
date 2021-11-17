@@ -14,11 +14,11 @@ template <typename F = Detail::WrongFuncType>
 class Combinator
 {
 public:
-    Combinator(std::string _delimiter = "")
+    explicit Combinator(std::string _delimiter = "")
         : delimiter(std::move(_delimiter))
     {}
 
-    Combinator(F&& _func)
+    explicit Combinator(F&& _func)
         : func(std::move(_func))
     {}
 

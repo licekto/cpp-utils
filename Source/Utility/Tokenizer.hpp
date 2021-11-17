@@ -2,12 +2,7 @@
 
 #include <string_view>
 
-/*
- * TODO:
- * 1. skipws/noskipws policy
- * 2. non-const editable iterator
- */
-
+// TODO: 1. skipws/noskipws policy
 namespace CppUtils
 {
 class Tokenizer
@@ -23,8 +18,8 @@ class Tokenizer
         using pointer = const ValueType *;
         using reference = const ValueType;
 
-        static ConstIterator create_end(const Tokenizer *tokenizer);
-        explicit ConstIterator(const Tokenizer *tokenizer) noexcept;
+        static ConstIterator create_end(const Tokenizer *_tokenizer);
+        explicit ConstIterator(const Tokenizer *_tokenizer) noexcept;
 
         ConstIterator(const ConstIterator&) = default;
         ConstIterator& operator=(const ConstIterator&) = default;
