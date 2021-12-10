@@ -1,6 +1,4 @@
-﻿include(../../CMake/AddSourcesToProject.cmake)
-
-add_sources_to_project(TARGET ${CPP_UTILS_TARGET} SOURCES
+﻿target_sources(${CPP_UTILS_TARGET} PRIVATE
         ProgramOptions.cpp ProgramOptions.hpp
         StringUtils.cpp StringUtils.hpp
         Tokenizer.cpp Tokenizer.hpp)
