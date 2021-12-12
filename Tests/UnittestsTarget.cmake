@@ -5,13 +5,16 @@ include(CTest)
 set(SRC_DIR ${CMAKE_CURRENT_LIST_DIR}/../Source/Utility)
 
 set(SRCTEST
-    ${CMAKE_CURRENT_LIST_DIR}/TestMain.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/FullEnumTest.cpp
     ${CMAKE_CURRENT_LIST_DIR}/ProgramOptionsTest.cpp
     ${CMAKE_CURRENT_LIST_DIR}/RetriableTest.cpp
     ${CMAKE_CURRENT_LIST_DIR}/StringUtilsTest.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/TestMain.cpp
     ${CMAKE_CURRENT_LIST_DIR}/ThreadSafeQueueTest.cpp
     ${CMAKE_CURRENT_LIST_DIR}/TokenizerTest.cpp)
+
+if(DEFINED LINK_BOOST)
+    set(SRCTEST ${SRCTEST} ${CMAKE_CURRENT_LIST_DIR}/FullEnumTest.cpp)
+endif()
 
 add_executable(${TARGET} ${SRCTEST})
 target_link_libraries(${TARGET} PUBLIC cpp-utils)
