@@ -68,7 +68,7 @@ namespace CppUtils
 			struct Control
 			{
 				std::atomic_bool detached{ false }, finished{ false };
-				std::exception_ptr exception;
+				std::exception_ptr exception{};
 			};
 
 			ReturnTypeT finalResult{};
