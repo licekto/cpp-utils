@@ -13,3 +13,6 @@ Builds with C++17, GCC and MSVC.
 ## Tests
 
 Contains unit tests written in Catch2.
+
+## TODO
+- skipws/noskipws policy in Tokenizer

@@ -6,5 +6,5 @@
         ThreadSafeQueue.hpp)
 
 if(DEFINED LINK_BOOST)
-    target_sources(${CPP_UTILS_TARGET} PRIVATE FullEnum.hpp)
+    target_sources(${CPP_UTILS_TARGET} PRIVATE FullEnum.cpp FullEnum.hpp)
 endif()

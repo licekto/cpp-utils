@@ -2,7 +2,6 @@
 
 #include <string_view>
 
-// TODO: 1. skipws/noskipws policy
 namespace CppUtils
 {
 class Tokenizer
