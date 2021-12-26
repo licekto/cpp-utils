@@ -38,4 +38,6 @@ TEST_CASE("FullEnum test")
     Day d1 = Day::wed;
 
     REQUIRE(d == d1);
+
+    REQUIRE(sizeof(d) <= 8);
 }

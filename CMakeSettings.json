@@ -1,0 +1,36 @@
+{
+  "configurations": [
+    {
+      "name": "x86-Debug",
+      "generator": "Visual Studio 15 2017",
+      "configurationType": "Debug",
+      "buildRoot": "${projectDir}\\build\\x86\\${configurationType}",
+      "cmakeCommandArgs": "-DCONFIG=x86",
+      "ctestCommandArgs": ""
+    },
+    {
+      "name": "x86-Release",
+      "generator": "Visual Studio 15 2017",
+      "configurationType": "Release",
+      "buildRoot": "${projectDir}\\build\\x86\\${configurationType}",
+      "cmakeCommandArgs": "-DCONFIG=x86",
+      "ctestCommandArgs": ""
+    },
+    {
+      "name": "x64-Debug",
+      "generator": "Visual Studio 15 2017 Win64",
+      "configurationType": "Debug",
+      "buildRoot": "${projectDir}\\build\\x64\\${configurationType}",
+      "cmakeCommandArgs": "-DCONFIG=x64",
+      "ctestCommandArgs": ""
+    },
+    {
+      "name": "x64-Release",
+      "generator": "Visual Studio 15 2017 Win64",
+      "configurationType": "Release",
+      "buildRoot": "${projectDir}\\build\\x64\\${configurationType}",
+      "cmakeCommandArgs": "-DCONFIG=x64",
+      "ctestCommandArgs": ""
+    }
+  ]
+}
