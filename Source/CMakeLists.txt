@@ -15,4 +15,4 @@ if(DEFINED LINK_BOOST)
     target_link_libraries(${CPP_UTILS_TARGET} LINK_PUBLIC ${Boost_LIBRARIES})
 endif()
 
-add_subdirectory(Utility)
+add_subdirectory(CppUtils)

@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <optional>
 
-#include <Utility/StringUtils.hpp>
+#include <CppUtils/StringUtils.hpp>
 
 namespace CppUtils
 {
