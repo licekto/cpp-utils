@@ -1,6 +1,7 @@
 ﻿target_sources(${CPP_UTILS_TARGET} PRIVATE
         ProgramOptions.cpp ProgramOptions.hpp
         Retriable.hpp
+        SimpleLogger.hpp
         StringUtils.cpp StringUtils.hpp
         Tokenizer.cpp Tokenizer.hpp
         ThreadSafeQueue.hpp)
