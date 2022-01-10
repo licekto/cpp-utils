@@ -99,6 +99,7 @@ void LoggerImpl::SetFile(std::string filename_)
 LoggerImpl::Line LoggerImpl::Log(const SourceLocation sourceLocation, const Level level)
 {
     auto timePoint = std::chrono::system_clock::now();
+    // TODO: Time dumper object
     std::time_t currentTime = std::chrono::system_clock::to_time_t(timePoint);
     auto timeInfo = std::localtime(&currentTime);
 
@@ -120,7 +121,7 @@ LoggerImpl::Line LoggerImpl::Log(const SourceLocation sourceLocation, const Leve
 void LoggerImpl::DumpLine(std::stringstream&& line)
 {
     const std::lock_guard<std::mutex> lock(mutex);
-    fileStream << std::move(line.str());
+    fileStream << std::move(line.view());
     ++lineCounter;
 
     if (lineCounter >= flushLinesLimit)

@@ -73,7 +73,7 @@ ProgramOptions& ProgramOptions::addDescription(std::string&& _description)
     return *this;
 }
 
-ProgramOptions& ProgramOptions::addParameter(const ParameterT type, const char shortName, std::string&& longName, std::string&& description,
+ProgramOptions& ProgramOptions::addParameter(const ParameterType type, const char shortName, std::string&& longName, std::string&& description,
                                              const bool isMandatory, const bool hasValue, void* value)
 {
     parameters.emplace_back(type, shortName, std::move(longName), std::move(description), isMandatory, hasValue, value);
@@ -108,7 +108,7 @@ void ProgramOptions::parse(int argc, const char** argv)
     checkMandatoryPresent();
 }
 
-ProgramOptions::Parameter::Parameter(const ParameterT _type, const char _shortName, std::string&& _longName, std::string&& _description,
+ProgramOptions::Parameter::Parameter(const ParameterType _type, const char _shortName, std::string&& _longName, std::string&& _description,
                                      const bool _isMandatory, const bool _hasValue, void* _value)
     : type(_type)
     , shortName(_shortName)
@@ -123,22 +123,22 @@ void ProgramOptions::Parameter::setValue(const std::string_view valueStr)
 {
     switch (type)
     {
-    case ParameterT::Double :
+    case ParameterType::Double :
     {
         setTargetValue(value, atof(valueStr.data()), isMandatory);
         break;
     }
-    case ParameterT::Flag :
+    case ParameterType::Flag :
     {
         setTargetValue(value, true, isMandatory);
         break;
     }
-    case ParameterT::Int64 :
+    case ParameterType::Int64 :
     {
         setTargetValue(value, atol(valueStr.data()), isMandatory);
         break;
     }
-    case ParameterT::String :
+    case ParameterType::String :
     {
         setTargetValue(value, std::string(valueStr), isMandatory);
         break;

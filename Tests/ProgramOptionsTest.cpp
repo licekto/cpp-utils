@@ -10,10 +10,10 @@ CppUtils::ProgramOptions buildProgramOptions(bool& flagParam, int64_t& intParam,
 {
     CppUtils::ProgramOptions programOptions;
     programOptions.addDescription("Test program");
-    programOptions.addParameter(CppUtils::ProgramOptions::ParameterT::Flag, 'f', "flag", "flag description", true, false, &flagParam);
-    programOptions.addParameter(CppUtils::ProgramOptions::ParameterT::Int64, 'i', "integer", "integer description", true, true, &intParam);
-    programOptions.addParameter(CppUtils::ProgramOptions::ParameterT::Double, 'd', "double", "double description", true, true, &doubleParam);
-    programOptions.addParameter(CppUtils::ProgramOptions::ParameterT::String, 's', "string", "string description", true, true, &stringParam);
+    programOptions.addParameter(CppUtils::ProgramOptions::ParameterType::Flag, 'f', "flag", "flag description", true, false, &flagParam);
+    programOptions.addParameter(CppUtils::ProgramOptions::ParameterType::Int64, 'i', "integer", "integer description", true, true, &intParam);
+    programOptions.addParameter(CppUtils::ProgramOptions::ParameterType::Double, 'd', "double", "double description", true, true, &doubleParam);
+    programOptions.addParameter(CppUtils::ProgramOptions::ParameterType::String, 's', "string", "string description", true, true, &stringParam);
     return programOptions;
 }
 
@@ -71,10 +71,10 @@ TEST_CASE("ProgramOptions valid optional")
 
     CppUtils::ProgramOptions programOptions;
     programOptions.addDescription("Test program");
-    programOptions.addParameter(CppUtils::ProgramOptions::ParameterT::Flag, 'f', "flag", "flag description", false, false, &optFlagParam);
-    programOptions.addParameter(CppUtils::ProgramOptions::ParameterT::Int64, 'i', "integer", "integer description", false, true, &optIntParam);
-    programOptions.addParameter(CppUtils::ProgramOptions::ParameterT::Double, 'd', "double", "double description", false, true, &optDoubleParam);
-    programOptions.addParameter(CppUtils::ProgramOptions::ParameterT::String, 's', "string", "string description", false, true, &optStringParam);
+    programOptions.addParameter(CppUtils::ProgramOptions::ParameterType::Flag, 'f', "flag", "flag description", false, false, &optFlagParam);
+    programOptions.addParameter(CppUtils::ProgramOptions::ParameterType::Int64, 'i', "integer", "integer description", false, true, &optIntParam);
+    programOptions.addParameter(CppUtils::ProgramOptions::ParameterType::Double, 'd', "double", "double description", false, true, &optDoubleParam);
+    programOptions.addParameter(CppUtils::ProgramOptions::ParameterType::String, 's', "string", "string description", false, true, &optStringParam);
     programOptions.parse(argc, argv);
 
     REQUIRE_FALSE(optFlagParam.has_value());
@@ -95,7 +95,7 @@ TEST_CASE("ProgramOptions missing mandatory")
 
     CppUtils::ProgramOptions programOptions;
     programOptions.addDescription("Test program");
-    programOptions.addParameter(CppUtils::ProgramOptions::ParameterT::Flag, 'f', "flag", "flag description", true, true, &flagParam);
+    programOptions.addParameter(CppUtils::ProgramOptions::ParameterType::Flag, 'f', "flag", "flag description", true, true, &flagParam);
     REQUIRE_THROWS_AS(programOptions.parse(argc, argv), CppUtils::ProgramOptions::MissingMandatoryParametersException);
 }
 
@@ -126,6 +126,6 @@ TEST_CASE("ProgramOptions missing value")
 
     CppUtils::ProgramOptions programOptions;
     programOptions.addDescription("Test program");
-    programOptions.addParameter(CppUtils::ProgramOptions::ParameterT::Int64, 'i', "integer", "integer description", true, true, &intParam);
+    programOptions.addParameter(CppUtils::ProgramOptions::ParameterType::Int64, 'i', "integer", "integer description", true, true, &intParam);
     REQUIRE_THROWS_AS(programOptions.parse(argc, argv), CppUtils::ProgramOptions::MissingParameterValueException);
 }

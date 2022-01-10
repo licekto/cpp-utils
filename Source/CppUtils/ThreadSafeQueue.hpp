@@ -1,39 +1,49 @@
 #pragma once
 
-#include <thread>
 #include <condition_variable>
 #include <queue>
+#include <thread>
+#include <variant>
+
+struct Terminate {};
+
+template <typename T>
+using Value = std::variant<T, Terminate>;
+
+template <typename T>
+bool isExit(const Value<T>& value)
+{
+    return std::holds_alternative<Terminate>(value);
+}
 
 template <class T>
 class ThreadSafeQueue
 {
-    mutable std::mutex mutex {};
-    std::condition_variable cv {};
-    std::queue<T> queue {};
 public:
     ThreadSafeQueue() = default;
     ThreadSafeQueue(const ThreadSafeQueue &) = delete;
     ThreadSafeQueue &operator=(const ThreadSafeQueue &) = delete;
+    ThreadSafeQueue(ThreadSafeQueue&&) = default;
+    ThreadSafeQueue &operator=(ThreadSafeQueue&&) = default;
 
-    void push(T &&item)
+    void push(Value<T> &&item)
     {
         std::lock_guard<std::mutex> lock(mutex);
         queue.push(std::move(item));
         cv.notify_one();
     }
 
-    T popAndWait()
+    Value<T> popAndWait()
     {
         std::unique_lock<std::mutex> lock(mutex);
         cv.wait(lock, [this] { return !queue.empty(); });
-        T result(std::move(queue.front()));
+        auto result(std::move(queue.front()));
         queue.pop();
         return result;
     }
 
-    bool empty() const
-    {
-        std::lock_guard<std::mutex> lock(mutex);
-        return queue.empty();
-    }
+private:
+    mutable std::mutex mutex {};
+    std::condition_variable cv {};
+    std::queue<Value<T>> queue {};
 };
