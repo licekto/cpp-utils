@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 
-#include <FullEnum.hpp>
+#include <CppUtils/FullEnum.hpp>
 
 DEF_ENUM(Day, mon, tue, wed, thu, fri, sat, sun);
 

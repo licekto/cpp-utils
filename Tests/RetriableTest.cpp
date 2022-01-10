@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 
-#include <Retriable.hpp>
+#include <CppUtils/Retriable.hpp>
 
 using namespace std::chrono_literals;
 

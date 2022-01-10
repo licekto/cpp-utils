@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 
-#include <Tokenizer.hpp>
+#include <CppUtils/Tokenizer.hpp>
 
 #include <vector>
 

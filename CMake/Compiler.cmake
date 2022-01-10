@@ -8,8 +8,8 @@ if(CCACHE_FOUND)
 endif(CCACHE_FOUND)
 
 if (UNIX)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -pthread")
     # -Weffc++ is too verbose, not usable
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -pthread")
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -pedantic -Wall -Wextra -Wno-unknown-pragmas -O0 -ggdb -fsanitize=address")
     set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -fstack-protector")
     link_libraries(stdc++fs)
@@ -32,3 +32,22 @@ set(PRECOMPILED_HEADERS
         <locale> <map> <memory> <mutex> <optional> <ostream> <queue> <random> <regex> <set> <sstream> <stdexcept>
         <string> <string_view> <system_error> <thread> <tuple> <typeindex> <typeinfo> <type_traits> <unordered_map>
         <unordered_set> <utility> <variant> <vector>)
+
+set(ALL_SOURCES_GLOBAL "" CACHE INTERNAL "")
+
+function(add_sources_to_list)
+    set(multiValueArgs SOURCES)
+    cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+    list(TRANSFORM ARG_SOURCES PREPEND ${CMAKE_CURRENT_SOURCE_DIR}/)
+    set(ALL_SOURCES_GLOBAL ${ALL_SOURCES_GLOBAL} ${ARG_SOURCES} CACHE INTERNAL "")
+endfunction(add_sources_to_list)
+
+function(setup_target)
+    set(oneValueArgs TARGET)
+    cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+    message("Setting up target " ${ARG_TARGET})
+    target_precompile_headers(${ARG_TARGET} PRIVATE ${PRECOMPILED_HEADERS})
+    set_property(TARGET ${ARG_TARGET} PROPERTY CXX_STANDARD 20)
+    target_link_libraries(${ARG_TARGET} ${Boost_LIBRARIES} Threads::Threads)
+    target_include_directories(${ARG_TARGET} PRIVATE ${Boost_INCLUDE_DIRS})
+endfunction()

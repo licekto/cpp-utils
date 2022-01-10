@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 
-#include <StringUtils.hpp>
+#include <CppUtils/StringUtils.hpp>
 
 TEST_CASE("StringUtils Combinator Combine")
 {

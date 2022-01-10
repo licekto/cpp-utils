@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 
-#include <ProgramOptions.hpp>
+#include <CppUtils/ProgramOptions.hpp>
 
 #include <optional>
 

@@ -1,11 +1,7 @@
-﻿target_sources(${CPP_UTILS_TARGET} PRIVATE
-        ProgramOptions.cpp ProgramOptions.hpp
-        Retriable.hpp
-        SimpleLogger.hpp
-        StringUtils.cpp StringUtils.hpp
-        Tokenizer.cpp Tokenizer.hpp
-        ThreadSafeQueue.hpp)
-
-if(DEFINED LINK_BOOST)
-    target_sources(${CPP_UTILS_TARGET} PRIVATE FullEnum.cpp FullEnum.hpp)
-endif()
+﻿add_sources_to_list(SOURCES FullEnum.cpp FullEnum.hpp
+                            Logger.cpp Logger.hpp
+                            ProgramOptions.cpp ProgramOptions.hpp
+                            Retriable.hpp
+                            StringUtils.cpp StringUtils.hpp
+                            Tokenizer.cpp Tokenizer.hpp
+                            ThreadSafeQueue.hpp)

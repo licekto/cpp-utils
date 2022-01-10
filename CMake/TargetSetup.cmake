@@ -1,5 +1,11 @@
 cmake_minimum_required(VERSION 3.21)
 
+set(LOG_LEVEL Info)
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    set(LOG_LEVEL Trace)
+endif()
+configure_file(${PROJECT_SOURCE_DIR}/Source/CppUtils/LogLevel.hpp.in ${CMAKE_BINARY_DIR}/generated/LogLevel.hpp)
+
 set(ALL_SOURCES_GLOBAL "" CACHE INTERNAL "")
 
 function(add_sources_to_list)
@@ -14,6 +20,7 @@ function(setup_target)
     cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
     message("Setting up target " ${ARG_TARGET})
     target_precompile_headers(${ARG_TARGET} PRIVATE ${PRECOMPILED_HEADERS})
+
     set_property(TARGET ${ARG_TARGET} PROPERTY CXX_STANDARD 20)
 
     target_link_libraries(${ARG_TARGET} Threads::Threads)
@@ -24,4 +31,6 @@ function(setup_target)
     if(cpp-utils)
         target_link_libraries(${ARG_TARGET} cpp-utils)
     endif()
+
+    target_include_directories(${ARG_TARGET} PRIVATE ${Boost_INCLUDE_DIRS} ${CMAKE_BINARY_DIR}/generated/)
 endfunction()

@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 
-#include <ThreadSafeQueue.hpp>
+#include <CppUtils/ThreadSafeQueue.hpp>
 
 TEST_CASE("ThreadSafeQueue test")
 {

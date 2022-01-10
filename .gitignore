@@ -1,0 +1,12 @@
+*bin/*
+*obj/*
+generated*
+*build/*
+*Build/*
+*.swp
+*.user
+*.autosave
+*.vs
+*.o
+*.idea
+__pycache__/
