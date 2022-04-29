@@ -11,7 +11,7 @@
 #include <string_view>
 #include <thread>
 
-#include <boost/lockfree/spsc_queue.hpp>
+//#include <boost/lockfree/spsc_queue.hpp>
 
 namespace Logger
 {
@@ -45,6 +45,8 @@ struct SourceLocation
     const std::string_view filename, function;
     const size_t line;
 };
+
+std::ostream &operator<<(std::ostream &os, const SourceLocation &sourceLocation);
 
 SourceLocation getSourceLocation(const char* file, const char* func, const size_t line);
 

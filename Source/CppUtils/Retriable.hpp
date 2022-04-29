@@ -127,8 +127,8 @@ namespace CppUtils
 		}
 
 	private:
-        std::chrono::milliseconds period;
-		uint32_t retries;
+        const std::chrono::milliseconds period;
+		const uint32_t retries;
 		Function function;
 	};
 }

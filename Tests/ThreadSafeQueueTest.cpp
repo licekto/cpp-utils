@@ -19,6 +19,7 @@ struct NonCopyable
     NonCopyable& operator=(NonCopyable&&) = default;
     int val{};
 };
+
 TEST_CASE("ThreadSafeQueue test")
 {
     ThreadSafeQueue<NonCopyable> q;

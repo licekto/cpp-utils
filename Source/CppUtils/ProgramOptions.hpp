@@ -49,9 +49,6 @@ public:
 private:
     struct Parameter
     {
-        Parameter(const Parameter&) = default;
-        Parameter& operator=(const Parameter&) = default;
-
         const ParameterType type;
         const char shortName;
         std::string longName;

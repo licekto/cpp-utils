@@ -115,7 +115,7 @@ TEST_CASE("Retriable: exception before detach")
 
 TEST_CASE("Retriable: exception before detach, multiple attempts")
 {
-    uint32_t attempt = 0;
+    std::atomic<uint32_t> attempt = 0;
     auto f = [&attempt]() -> uint32_t
     {
         ++attempt;

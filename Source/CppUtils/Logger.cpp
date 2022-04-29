@@ -17,7 +17,7 @@ namespace Detail
 namespace
 {
 static inline constexpr const char *LevelStrings[]{"TRACE", "DEBUG", "INFO", "WARNING", "ERROR"};
-static constexpr size_t LevelsCount = sizeof(LevelStrings) / sizeof(LevelStrings[0]);
+//static constexpr size_t LevelsCount = sizeof(LevelStrings) / sizeof(LevelStrings[0]);
 
 static constexpr const char *levelToString(const Level level)
 {
@@ -30,11 +30,11 @@ static constexpr bool debugLessOrEqualLevel(const Level level) noexcept
 }
 
 static constexpr std::string_view Delim = "::";
+}
 
-inline std::ostream &operator<<(std::ostream &os, const SourceLocation &sourceLocation)
+std::ostream &operator<<(std::ostream &os, const SourceLocation &sourceLocation)
 {
     return os << sourceLocation.filename << Delim << sourceLocation.function << Delim << sourceLocation.line;
-}
 }
 
 SourceLocation getSourceLocation(const char* file, const char* func, const size_t line)
