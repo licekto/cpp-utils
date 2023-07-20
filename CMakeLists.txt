@@ -8,4 +8,5 @@ include(Compiler)
 include(TargetSetup)
 
 add_subdirectory(Source)
-include(Tests/UnittestsTarget.cmake)
+add_subdirectory(Tests)
+#include(Tests/UnittestsTarget.cmake)

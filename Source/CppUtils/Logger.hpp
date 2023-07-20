@@ -10,6 +10,7 @@
 #include <string.h>
 #include <string_view>
 #include <thread>
+#include <unordered_map>
 
 //#include <boost/lockfree/spsc_queue.hpp>
 
@@ -52,7 +53,7 @@ SourceLocation getSourceLocation(const char* file, const char* func, const size_
 
 inline std::unordered_map<std::thread::id, std::string> threadsNames;
 
-const std::string &GetCurrentThreadName();
+const std::string& GetCurrentThreadName();
 
 class LoggerImpl
 {
@@ -94,7 +95,8 @@ private:
     static constexpr size_t flushLinesLimit = 1;
     void DumpLine(std::stringstream&& line);
 
-    std::string filename{"main.log"};
+    std::string filename;
+    bool fileSet = false;
     std::ofstream fileStream;
     std::mutex mutex;
     size_t lineCounter{0};
