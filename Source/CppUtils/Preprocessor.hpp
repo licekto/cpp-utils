@@ -1,3 +1,5 @@
+// Source: https://www.scs.stanford.edu/~dm/blog/va-opt.html#the-for_each-macro
+
 #define PARENS ()
 
 #define EXPAND(...) EXPAND4(EXPAND4(EXPAND4(EXPAND4(__VA_ARGS__))))

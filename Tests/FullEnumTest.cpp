@@ -2,8 +2,6 @@
 
 #include <CppUtils/FullEnum.hpp>
 
-DEF_ENUM(Day, mon, tue, wed, thu, fri, sat, sun);
-
 TEST_CASE("Get until delimiter test")
 {
     const std::string expected = "abc";
@@ -14,6 +12,8 @@ TEST_CASE("Get until delimiter test")
 
     REQUIRE(result == expected);
 }
+
+DEF_ENUM(Day, mon, tue, wed, thu, fri, sat, sun);
 
 TEST_CASE("FullEnum test")
 {
