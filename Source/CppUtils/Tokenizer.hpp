@@ -35,7 +35,7 @@ class Tokenizer
     private:
         const Tokenizer *tokenizer;
         size_t current, next;
-        mutable std::string_view tmpStorage{}; // A little hack to allow support for operator->.
+        mutable std::string_view tmpStorage{}; // A hack to allow support for operator->.
     };
 
 public:

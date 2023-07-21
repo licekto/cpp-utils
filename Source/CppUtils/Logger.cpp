@@ -141,7 +141,7 @@ LoggerImpl::Line LoggerImpl::Log(const SourceLocation sourceLocation, const Leve
 void LoggerImpl::DumpLine(std::stringstream&& line)
 {
     const std::lock_guard<std::mutex> lock(mutex);
-    fileStream << std::move(line.view());
+    fileStream << line.view();
     ++lineCounter;
 
     if (lineCounter >= flushLinesLimit)

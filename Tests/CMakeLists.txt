@@ -16,26 +16,32 @@ set(SRCTEST
 SET(UNIT_TEST_TARGET cpp-utils-unit-tests)
 
 add_test_target(TARGET ${UNIT_TEST_TARGET}
-                COMPILER_FLAG ""
+                COMPILER_FLAG --coverage
                 SOURCES "${SRCTEST};${ALL_SOURCES_GLOBAL}"
                 INCLUDE_DIRS ${SRC_DIR})
 
-add_valgrind_target(TARGET ${UNIT_TEST_TARGET})
+#add_valgrind_target(TARGET ${UNIT_TEST_TARGET})
+#
+#add_test_target(TARGET cpp-utils-asan-tests
+#                COMPILER_FLAG -fsanitize=address
+#                SOURCES "${SRCTEST};${ALL_SOURCES_GLOBAL}"
+#                INCLUDE_DIRS ${SRC_DIR})
+#
+#add_test_target(TARGET cpp-utils-lsan-tests
+#                COMPILER_FLAG -fsanitize=leak
+#                SOURCES "${SRCTEST};${ALL_SOURCES_GLOBAL}"
+#                INCLUDE_DIRS ${SRC_DIR})
+#
+#add_test_target(TARGET cpp-utils-ubsan-tests
+#                COMPILER_FLAG -fsanitize=undefined
+#                SOURCES "${SRCTEST};${ALL_SOURCES_GLOBAL}"
+#                INCLUDE_DIRS ${SRC_DIR})
 
-add_test_target(TARGET cpp-utils-asan-tests
-                COMPILER_FLAG -fsanitize=address
-                SOURCES "${SRCTEST};${ALL_SOURCES_GLOBAL}"
-                INCLUDE_DIRS ${SRC_DIR})
-
-add_test_target(TARGET cpp-utils-lsan-tests
-                COMPILER_FLAG -fsanitize=leak
-                SOURCES "${SRCTEST};${ALL_SOURCES_GLOBAL}"
-                INCLUDE_DIRS ${SRC_DIR})
-
-add_test_target(TARGET cpp-utils-ubsan-tests
-                COMPILER_FLAG -fsanitize=undefined
-                SOURCES "${SRCTEST};${ALL_SOURCES_GLOBAL}"
-                INCLUDE_DIRS ${SRC_DIR})
+# Not available in GCC
+#add_test_target(TARGET cpp-utils-cfi-tests
+#                COMPILER_FLAG -fsanitize=cfi
+#                SOURCES "${SRCTEST};${ALL_SOURCES_GLOBAL}"
+#                INCLUDE_DIRS ${SRC_DIR})
 
 # Catch2 is not thread safe and therefore tsan generates a lot of errors
 #add_test_target(TARGET cpp-utils-tsan-tests

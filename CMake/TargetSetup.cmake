@@ -17,5 +17,6 @@ function(setup_target)
 
     target_include_directories(${ARG_TARGET} PRIVATE ${CMAKE_BINARY_DIR}/generated/)
     set_property(TARGET ${ARG_TARGET} PROPERTY CXX_STANDARD 20)
+    set_property(TARGET ${ARG_TARGET} PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
     target_link_libraries(${ARG_TARGET} Threads::Threads)
 endfunction()
