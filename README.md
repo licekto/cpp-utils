@@ -1,8 +1,6 @@
-# C++ Utilities
+# C++ Utilities [![CMake](https://github.com/licekto/cpp-utils/actions/workflows/cmake.yml/badge.svg)](https://github.com/licekto/cpp-utils/actions/workflows/cmake.yml)
 
 Collection of various C++ utilities.
-
-[![CMake](https://github.com/licekto/cpp-utils/actions/workflows/cmake.yml/badge.svg)](https://github.com/licekto/cpp-utils/actions/workflows/cmake.yml)
 
 ## List of utilities
 
