@@ -2,6 +2,8 @@
 
 Collection of various C++ utilities.
 
+![cpp-utils](https://github.com/licekto/cpp-utils/actions/workflows/cmake.yml)
+
 ## List of utilities
 
 - ProgramOptions: Program options parser
