@@ -26,29 +26,58 @@ private:
     std::string msg;
 };
 
+/**
+ * @brief The Logger Level enum
+ */
 enum class Level
 {
-    Trace = 0, Debug = 1, Info = 2, Warning = 3, Error = 4
+    Trace = 0, /// Trace level
+    Debug = 1, /// Debug level
+    Info = 2, /// Info level
+    Warning = 3, /// Warning level
+    Error = 4 /// Error level
 };
 
 namespace Detail
 {
+/// Global log level
+static constexpr Level GlobalLevel { Level::LOG_LEVEL };
 
-static constexpr Level GlobalLevel(Level::LOG_LEVEL);
-
+/**
+ * @brief enabledLevel
+ * @param level
+ * @return true if the log level is enabled
+ */
 static constexpr bool enabledLevel(const Level level) noexcept
 {
     return (level >= GlobalLevel);
 }
 
+/**
+ * @brief The SourceLocation class
+ * Contains info about the current logged line
+ */
 struct SourceLocation
 {
     const std::string_view filename, function;
     const size_t line;
 };
 
+/**
+ * @brief operator << for SourceLocation to be printed in the log line
+ * @param os
+ * @param sourceLocation
+ * @return
+ */
 std::ostream &operator<<(std::ostream &os, const SourceLocation &sourceLocation);
 
+/**
+ * @brief getSourceLocation Obtains source location for the current line
+ * @param file
+ * @param func
+ * @param line
+ * @return
+ */
 SourceLocation getSourceLocation(const char* file, const char* func, const size_t line);
 
 inline std::unordered_map<std::thread::id, std::string> threadsNames;

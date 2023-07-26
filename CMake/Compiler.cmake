@@ -43,6 +43,9 @@ if(IWYU)
     set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE include-what-you-use)
 endif()
 
-set(CMAKE_CXX_CPPCHECK "cppcheck;--enable=all;--suppress=missingIncludeSystem;--xml;--output-file=cppcheck_output.txt")
+option(CPPCHECK "Turns on cppcheck processing." OFF)
+if(CPPCHECK)
+    set(CMAKE_CXX_CPPCHECK "cppcheck;--enable=all;--suppress=missingIncludeSystem;--xml;--output-file=cppcheck_output.txt")
+endif()
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)

@@ -62,8 +62,8 @@ private:
                   const bool _isMandatory, const bool _hasValue, void* _value);
 
         void setValue(const std::string_view valueStr);
-
     };
+
     friend std::ostream& operator<<(std::ostream& os, const Parameter& parameter);
 
     Parameter* getParameter(const std::string_view name);

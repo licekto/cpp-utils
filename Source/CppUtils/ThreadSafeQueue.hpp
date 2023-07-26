@@ -5,35 +5,37 @@
 #include <thread>
 #include <variant>
 
-struct Terminate {};
-
-template <typename T>
-using Value = std::variant<T, Terminate>;
-
-template <typename T>
-bool isExit(const Value<T>& value)
+namespace CppUtils
 {
-    return std::holds_alternative<Terminate>(value);
-}
-
+/**
+ * @brief Blocking thread safe queue class
+ *
+ * Blocks on push and pop, uses conditional variable to signal that
+ * an element has been inserted.
+ *
+ * Uses a dedicated object ('cork') to signal that the waiting should end.
+ */
 template <class T>
 class ThreadSafeQueue
 {
 public:
+    struct Terminate {};
+    using Value = std::variant<T, Terminate>;
+
     ThreadSafeQueue() = default;
     ThreadSafeQueue(const ThreadSafeQueue &) = delete;
     ThreadSafeQueue &operator=(const ThreadSafeQueue &) = delete;
     ThreadSafeQueue(ThreadSafeQueue&&) = default;
     ThreadSafeQueue &operator=(ThreadSafeQueue&&) = default;
 
-    void push(Value<T> &&item)
+    void Push(Value &&item)
     {
         std::lock_guard<std::mutex> lock(mutex);
         queue.push(std::move(item));
         cv.notify_one();
     }
 
-    Value<T> popAndWait()
+    Value PopAndWait()
     {
         std::unique_lock<std::mutex> lock(mutex);
         cv.wait(lock, [this] { return !queue.empty(); });
@@ -42,8 +44,14 @@ public:
         return result;
     }
 
+    static bool IsExit(const Value& value)
+    {
+        return std::holds_alternative<Terminate>(value);
+    }
+
 private:
     mutable std::mutex mutex {};
     std::condition_variable cv {};
-    std::queue<Value<T>> queue {};
+    std::queue<Value> queue {};
 };
+}

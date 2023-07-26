@@ -129,3 +129,23 @@ TEST_CASE("ProgramOptions missing value")
     programOptions.addParameter(CppUtils::ProgramOptions::ParameterType::Int64, 'i', "integer", "integer description", true, true, &intParam);
     REQUIRE_THROWS_AS(programOptions.parse(argc, argv), CppUtils::ProgramOptions::MissingParameterValueException);
 }
+
+struct Param
+{
+    std::string name;
+};
+
+template <typename T>
+struct ParamT : public Param
+{
+    T& value;
+};
+
+#include <memory>
+#include <vector>
+
+using Params = std::vector<std::unique_ptr<Param>>;
+
+TEST_CASE("ProgramOptions PoC")
+{
+}

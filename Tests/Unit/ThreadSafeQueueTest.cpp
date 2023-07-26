@@ -22,20 +22,22 @@ struct NonCopyable
 
 TEST_CASE("ThreadSafeQueue test")
 {
-    ThreadSafeQueue<NonCopyable> q;
+    using QType = CppUtils::ThreadSafeQueue<NonCopyable>;
+
+    QType q;
     const std::vector<int> values{1, 2, 3};
     std::thread t([&q, &values]
     {
         for (const auto value : values)
         {
-            q.push(value);
+            q.Push(value);
         }
-        q.push(Terminate{});
+        q.Push(QType::Terminate{});
     });
 
-    REQUIRE(std::get<NonCopyable>(q.popAndWait()) == values[0]);
-    REQUIRE(std::get<NonCopyable>(q.popAndWait()) == values[1]);
-    REQUIRE(std::get<NonCopyable>(q.popAndWait()) == values[2]);
-    REQUIRE(isExit(q.popAndWait()));
+    REQUIRE(std::get<NonCopyable>(q.PopAndWait()) == values[0]);
+    REQUIRE(std::get<NonCopyable>(q.PopAndWait()) == values[1]);
+    REQUIRE(std::get<NonCopyable>(q.PopAndWait()) == values[2]);
+    REQUIRE(QType::IsExit(q.PopAndWait()));
     t.join();
 }

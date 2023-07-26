@@ -23,5 +23,13 @@ function(add_valgrind_target)
     set(multiValueArgs)
     cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
-    add_test(NAME "${ARG_TARGET}-valgrind" COMMAND valgrind --verbose --leak-check=full --show-reachable=yes --track-origins=yes ./${ARG_TARGET})
+    add_test(NAME "${ARG_TARGET}-valgrind" COMMAND valgrind --verbose --leak-check=full --show-reachable=yes --show-leak-kinds=all --track-origins=yes ./${ARG_TARGET})
+endfunction()
+
+function(add_helgrind_target)
+    set(oneValueArgs TARGET)
+    set(multiValueArgs)
+    cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+    add_test(NAME "${ARG_TARGET}-helgrind" COMMAND valgrind --tool=helgrind ./${ARG_TARGET})
 endfunction()

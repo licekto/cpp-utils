@@ -123,26 +123,26 @@ void ProgramOptions::Parameter::setValue(const std::string_view valueStr)
 {
     switch (type)
     {
-    case ParameterType::Double :
-    {
-        setTargetValue(value, atof(valueStr.data()), isMandatory);
-        break;
-    }
-    case ParameterType::Flag :
-    {
-        setTargetValue(value, true, isMandatory);
-        break;
-    }
-    case ParameterType::Int64 :
-    {
-        setTargetValue(value, atol(valueStr.data()), isMandatory);
-        break;
-    }
-    case ParameterType::String :
-    {
-        setTargetValue(value, std::string(valueStr), isMandatory);
-        break;
-    }
+        case ParameterType::Double :
+        {
+            setTargetValue(value, atof(valueStr.data()), isMandatory);
+            break;
+        }
+        case ParameterType::Flag :
+        {
+            setTargetValue(value, true, isMandatory);
+            break;
+        }
+        case ParameterType::Int64 :
+        {
+            setTargetValue(value, atol(valueStr.data()), isMandatory);
+            break;
+        }
+        case ParameterType::String :
+        {
+            setTargetValue(value, std::string(valueStr), isMandatory);
+            break;
+        }
     }
 }
 
