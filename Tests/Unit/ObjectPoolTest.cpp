@@ -51,7 +51,7 @@ TEST_CASE("ObjectPool - randomized smoke test", "[ObjectPool]")
     CppUtils::ObjectPool<Person> objectPool(capacity);
     std::vector<Person *> persons;
 
-    static constexpr size_t range = capacity;
+    static constexpr size_t range = capacity - 1;
     static constexpr size_t iterations = 1000;
     CppUtils::RandomDevice<size_t> rd(0, range);
 
