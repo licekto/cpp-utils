@@ -17,4 +17,11 @@ include(Compiler)
 include(TargetSetup)
 
 add_subdirectory(Source)
-add_subdirectory(Tests)
+
+option(BUILD_TESTS "BUILD_TESTS" OFF)
+
+message("BUILD_TESTS: " ${BUILD_TESTS})
+
+if (${BUILD_TESTS})
+    add_subdirectory(Tests)
+endif()
