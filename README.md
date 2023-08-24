@@ -35,7 +35,6 @@ Allows generation of _test coverage_ report using `lcov`.
 - multithreaded output stream: copy values to a queue, convert to string and flush in a separate thread
 - use ^ in logger as a policy
 - add named threads and use in logger
-- C++20 modules
 - Follow hints on CMake from https://github.com/StableCoder/cmake-scripts
     - Add doxygen comments and generate the documentation
     - Try AFL++ fuzzing

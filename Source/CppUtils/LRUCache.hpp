@@ -40,10 +40,7 @@ public:
     /**
      * @brief Get
      * @param key Key to be obtained
-     * @return Pointer to the internally held value, nullptr if the key does not exist
-     *
-     * Caution: pointer to the value may be invalidated.
-     * Don't store the pointers and copy the value immediately.
+     * @return Optional value: nullopt if the value is not available
      */
     std::optional<ValueT> Get(const KeyT key) noexcept
     {
@@ -57,7 +54,6 @@ public:
 
         list.splice(std::cbegin(list), list, it->second);
 
-        //return it->second->elem.value;
         return std::cbegin(list)->value;
     }
 

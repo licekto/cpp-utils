@@ -20,7 +20,7 @@ struct NonCopyable
     int val{};
 };
 
-TEST_CASE("ThreadSafeQueue test")
+TEST_CASE("Basic test", "[ThreadSafeQueue]")
 {
     using QType = CppUtils::ThreadSafeQueue<NonCopyable>;
 

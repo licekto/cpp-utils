@@ -2,7 +2,7 @@
 
 #include <CppUtils/FullEnum.hpp>
 
-TEST_CASE("Get until delimiter test")
+TEST_CASE("Get until delimiter test", "[FullEnum]")
 {
     const std::string expected = "abc";
     const std::string input = GENERATE("abc", "abc ", "abc,", "abc; ");
@@ -15,7 +15,7 @@ TEST_CASE("Get until delimiter test")
 
 DEF_ENUM(Day, mon, tue, wed, thu, fri, sat, sun);
 
-TEST_CASE("FullEnum test")
+TEST_CASE("FullEnum test", "[FullEnum]")
 {
     Day d = Day::mon;
 

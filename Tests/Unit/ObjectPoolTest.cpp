@@ -108,7 +108,7 @@ struct TestType
     static inline size_t destructorCalled = 0;
 };
 
-TEST_CASE("ObjectPool - type destructor call test", "[ObjectPool][test]")
+TEST_CASE("ObjectPool - type destructor call test", "[ObjectPool]")
 {
     CppUtils::ObjectPool<TestType> objectPool(3);
 
@@ -130,7 +130,7 @@ TEST_CASE("ObjectPool - type destructor call test", "[ObjectPool][test]")
     REQUIRE(TestType::destructorCalled == 3);
 }
 
-TEST_CASE("ObjectPool - variadic constructor", "[ObjectPool][test]")
+TEST_CASE("ObjectPool - variadic constructor", "[ObjectPool]")
 {
     struct X
     {

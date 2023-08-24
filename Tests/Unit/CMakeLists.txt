@@ -9,6 +9,7 @@ set(SRC_DIR ${CMAKE_CURRENT_LIST_DIR}/../../Source/)
 set(SRCTEST
     ${CMAKE_CURRENT_LIST_DIR}/FullEnumTest.cpp
     ${CMAKE_CURRENT_LIST_DIR}/ObjectPoolTest.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/LoggerTest.cpp
     ${CMAKE_CURRENT_LIST_DIR}/LRUCacheTest.cpp
     ${CMAKE_CURRENT_LIST_DIR}/ProgramOptionsTest.cpp
     ${CMAKE_CURRENT_LIST_DIR}/RetriableTest.cpp

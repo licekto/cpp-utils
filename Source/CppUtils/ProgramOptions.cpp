@@ -30,32 +30,25 @@ void setTargetValue(void* target, const T& value, const bool isMandatory)
 }
 }
 
-ProgramOptions::UnknownParameterException::UnknownParameterException(const std::string& name)
-    : message("Parameter '" + name + "' is unknown")
+UnknownParameterException::UnknownParameterException(const std::string& name)
+    : Exception("Parameter '" + name + "' is unknown")
 {}
 
-const char* ProgramOptions::UnknownParameterException::what() const noexcept
-{
-    return message.c_str();
-}
-
-ProgramOptions::MissingParameterValueException::MissingParameterValueException(const std::string& name)
-    : message("Missing value for the '" + name + "' parameter")
+MissingParameterValueException::MissingParameterValueException(const std::string& name)
+    : Exception("Missing value for the '" + name + "' parameter")
 {}
 
-const char* ProgramOptions::MissingParameterValueException::what() const noexcept
-{
-    return message.c_str();
-}
-
-ProgramOptions::MissingMandatoryParametersException::MissingMandatoryParametersException(const std::vector<std::string>& missing)
-    : message("Missing mandatory '" + Combinator(",").Combine(missing) + "' parameter")
+MissingMandatoryParametersException::MissingMandatoryParametersException(const std::vector<std::string>& missing)
+    : Exception("Missing mandatory '" + Combinator(",").Combine(missing) + "' parameter")
 {}
 
-const char* ProgramOptions::MissingMandatoryParametersException::what() const noexcept
-{
-    return message.c_str();
-}
+WrongParameterTypeException::WrongParameterTypeException(const std::string& expected, const std::string& actual)
+    : Exception("Wrong parameter type, expected: '" + expected + "', actual: " + actual)
+{}
+
+MissingVariableException::MissingVariableException(const std::string& paramName)
+    : Exception("Missing variable for the '" + paramName + "' parameter")
+{}
 
 std::ostream& operator<<(std::ostream& os, const ProgramOptions& programOptions)
 {
@@ -70,13 +63,6 @@ std::ostream& operator<<(std::ostream& os, const ProgramOptions& programOptions)
 ProgramOptions& ProgramOptions::addDescription(std::string&& _description)
 {
     description = _description;
-    return *this;
-}
-
-ProgramOptions& ProgramOptions::addParameter(const ParameterType type, const char shortName, std::string&& longName, std::string&& description,
-                                             const bool isMandatory, const bool hasValue, void* value)
-{
-    parameters.emplace_back(type, shortName, std::move(longName), std::move(description), isMandatory, hasValue, value);
     return *this;
 }
 

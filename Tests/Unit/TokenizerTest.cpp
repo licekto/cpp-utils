@@ -20,7 +20,7 @@ void testIteratorType(const ItT begin, const ItT end, const DataItT tBegin, cons
     REQUIRE(tIt == tEnd);
 }
 
-TEST_CASE("Syntax")
+TEST_CASE("Syntax", "[Tokenizer]")
 {
     using namespace std::string_view_literals;
     CppUtils::Tokenizer tokenizer("a -b1 - cxZ- dABZ"sv, "- "sv);
@@ -43,7 +43,7 @@ TEST_CASE("Syntax")
     REQUIRE(it == std::cend(tokenizer));
 }
 
-TEST_CASE("Valid tokens")
+TEST_CASE("Valid tokens", "[Tokenizer]")
 {
     struct TestCase
     {
@@ -75,7 +75,7 @@ TEST_CASE("Valid tokens")
     REQUIRE(expectedIt == std::end(tc.expectedTokens));
 }
 
-TEST_CASE("Invalid access")
+TEST_CASE("Invalid access", "[Tokenizer]")
 {
     CppUtils::Tokenizer tokenizer("a -b1 - cxZ- dABZ"sv, "- "sv);
     auto it = std::end(tokenizer);

@@ -2,12 +2,12 @@
 
 #include <CppUtils/StringUtils.hpp>
 
-TEST_CASE("StringUtils Combinator Combine")
+TEST_CASE("Combinator Combine", "[StringUtils]")
 {
     REQUIRE("1, 2, sTR#, 3.14, nullptr" == CppUtils::Combinator(", ").Combine(1, '2', "sTR#", 3.14, nullptr));
 }
 
-TEST_CASE("StringUtils Combinator Container")
+TEST_CASE("Combinator Container", "[StringUtils]")
 {
     std::vector<int> vec{1, 2, 3, 4};
     REQUIRE("1;2;3;4" == CppUtils::Combinator(";").Combine(vec));

@@ -8,7 +8,7 @@ static constexpr auto period = 30ms;
 static constexpr auto delay = period + 20ms;
 static constexpr uint32_t retries = 5;
 
-TEST_CASE("Retriable: immediate success")
+TEST_CASE("Immediate success", "[Retriable]")
 {
     auto f = [](const double a, const std::string& str) -> int
     {
@@ -21,7 +21,7 @@ TEST_CASE("Retriable: immediate success")
     REQUIRE(13 == result);
 }
 
-TEST_CASE("Retriable: successful retry after delay")
+TEST_CASE("Successful retry after delay", "[Retriable]")
 {
     static constexpr uint32_t delayedTimes = 3;
 
@@ -55,7 +55,7 @@ TEST_CASE("Retriable: successful retry after delay")
 }
 
 static constexpr uint32_t defaultValue = 123445566;
-TEST_CASE("Retriable: delay too long")
+TEST_CASE("Delay too long", "[Retriable]")
 {
     struct X
     {
@@ -84,7 +84,7 @@ struct TestException : public std::exception
     }
 };
 
-TEST_CASE("Retriable: exception after detach")
+TEST_CASE("Exception after detach", "[Retriable]")
 {
     std::atomic<uint32_t> attempts = 0;
     auto f = [&attempts]() -> uint32_t
@@ -102,7 +102,7 @@ TEST_CASE("Retriable: exception after detach")
     REQUIRE_NOTHROW(retriable.Run());
 }
 
-TEST_CASE("Retriable: exception before detach")
+TEST_CASE("Exception before detach", "[Retriable]")
 {
     auto f = []() -> uint32_t
     {
@@ -113,7 +113,7 @@ TEST_CASE("Retriable: exception before detach")
     REQUIRE_THROWS_AS(retriable.Run(), TestException);
 }
 
-TEST_CASE("Retriable: exception before detach, multiple attempts")
+TEST_CASE("Exception before detach, multiple attempts", "[Retriable]")
 {
     std::atomic<uint32_t> attempt = 0;
     auto f = [&attempt]() -> uint32_t
@@ -131,7 +131,7 @@ TEST_CASE("Retriable: exception before detach, multiple attempts")
     REQUIRE_THROWS_AS(retriable.Run(), TestException);
 }
 
-TEST_CASE("Retriable: limits")
+TEST_CASE("Limits", "[Retriable]")
 {
     auto f = []() -> uint32_t
     {
@@ -151,7 +151,7 @@ TEST_CASE("Retriable: limits")
     REQUIRE(exceptionThrown);
 }
 
-TEST_CASE("Retriable: copy/move")
+TEST_CASE("Copy/move", "[Retriable]")
 {
     static constexpr uint32_t delayedTimes = 2;
 

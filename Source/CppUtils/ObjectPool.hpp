@@ -8,6 +8,30 @@
 
 namespace CppUtils
 {
+class ObjectPoolMemoryException : public Exception
+{
+public:
+    ObjectPoolMemoryException(const void *objAddress)
+        : Exception("The object at address '" + ptrToString(objAddress) + "' is not managed by this object pool")
+    {}
+};
+
+class ObjectPoolCapacityException : public Exception
+{
+public:
+    ObjectPoolCapacityException(const size_t capacity)
+        : Exception("The object pool's capacity=" + std::to_string(capacity) + " exceeded")
+    {}
+};
+
+class ObjectPoolDoubleFreeException : public Exception
+{
+public:
+    ObjectPoolDoubleFreeException(const void *objectAddress)
+        : Exception("The object at address '" + ptrToString(objectAddress) + "' has already been freed")
+    {}
+};
+
 /**
  * @brief The ObjectPool class
  * @tparam T Object type

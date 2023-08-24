@@ -5,7 +5,6 @@
 #include <thread>
 
 #include <CppUtils/LRUCache.hpp>
-#include <CppUtils/ObjectPool.hpp>
 #include <CppUtils/Utility.hpp>
 
 using T = uint32_t;
