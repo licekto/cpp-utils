@@ -28,6 +28,11 @@ public:
     ThreadSafeQueue(ThreadSafeQueue&&) = default;
     ThreadSafeQueue &operator=(ThreadSafeQueue&&) = default;
 
+    void Done()
+    {
+        Push(Terminate{});
+    }
+
     void Push(Value &&item)
     {
         std::lock_guard<std::mutex> lock(mutex);
@@ -47,6 +52,11 @@ public:
     static bool IsExit(const Value& value)
     {
         return std::holds_alternative<Terminate>(value);
+    }
+
+    static T GetValue(const Value& value)
+    {
+        return std::get<T>(value);
     }
 
 private:
