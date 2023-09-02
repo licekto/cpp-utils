@@ -5,7 +5,7 @@
 
 #include <CppUtils/LRUCache.hpp>
 #include <CppUtils/ObjectPool.hpp>
-#include <CppUtils/Utility.hpp>
+#include <CppUtils/Random.hpp>
 
 #ifndef CAPACITY
     #define CAPACITY 5000

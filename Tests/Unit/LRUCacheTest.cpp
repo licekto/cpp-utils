@@ -5,7 +5,7 @@
 #include <thread>
 
 #include <CppUtils/LRUCache.hpp>
-#include <CppUtils/Utility.hpp>
+#include <CppUtils/Random.hpp>
 
 using T = uint32_t;
 

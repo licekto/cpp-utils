@@ -4,7 +4,7 @@
 #include <vector>
 
 #include <CppUtils/ObjectPool.hpp>
-#include <CppUtils/Utility.hpp>
+#include <CppUtils/Random.hpp>
 
 TEST_CASE("ObjectPool - base cases", "[ObjectPool]")
 {

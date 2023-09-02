@@ -2,16 +2,17 @@
 
 #include <chrono>
 #include <cmath>
-#include <limits>
-#include <mutex>
-#include <random>
+#include <functional>
+#include <iostream>
 #include <vector>
 
 namespace CppUtils
 {
+
 struct Stats
 {
     const double mean{0}, standardDeviation{0};
+    std::string ToString(const std::string& units) const;
 };
 
 template <typename UnitT>
@@ -54,30 +55,39 @@ auto measure(const size_t iterations, F&& f)
     return measuredTimes;
 }
 
-template <typename T = uint32_t>
-class RandomDevice
+template <typename UnitT>
+class Profiler
 {
 public:
-    RandomDevice(const T from, const T to);
-    T Get();
+    using DestructorCallback = std::function<void(UnitT)>;
+    Profiler(DestructorCallback&& destructorCallback = {})
+        : destructorCallback(std::move(destructorCallback))
+        , begin(std::chrono::high_resolution_clock::now())
+    {}
+
+    ~Profiler()
+    {
+        const auto end = std::chrono::high_resolution_clock::now();
+        if (destructorCallback)
+        {
+            destructorCallback(std::chrono::duration_cast<UnitT>(end - begin));
+        }
+    }
+
+    void Restart()
+    {
+        begin = std::chrono::high_resolution_clock::now();
+    }
+
+    size_t Measure()
+    {
+        const auto end = std::chrono::high_resolution_clock::now();
+        return std::chrono::duration_cast<UnitT>(end - begin).count();
+    }
 
 private:
-    std::mutex mutex;
-    std::random_device rd;
-    std::mt19937 gen;
-    std::uniform_int_distribution<T> distribution;
+    DestructorCallback destructorCallback;
+    std::chrono::time_point<std::chrono::high_resolution_clock> begin;
 };
 
-template <typename T>
-RandomDevice<T>::RandomDevice(const T from, const T to)
-    : gen(rd())
-    , distribution(from, to)
-{}
-
-template <typename T>
-T RandomDevice<T>::Get()
-{
-    std::unique_lock lock(mutex);
-    return distribution(gen);
-}
 }

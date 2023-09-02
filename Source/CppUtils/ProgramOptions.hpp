@@ -49,7 +49,7 @@ public:
 
     template <typename T>
     ProgramOptions& addParameter(const ParameterType type, const char shortName, std::string&& longName,
-                                 std::string&& description, const bool hasValue, T* value = nullptr)
+                                 std::string&& description, const bool hasValue, T* value)
     {
         checkParam<T>(type, value, longName);
         parameters.emplace_back(type, shortName, std::move(longName), std::move(description), true, hasValue, value);
@@ -58,7 +58,7 @@ public:
 
     template <typename T>
     ProgramOptions& addOptionalParameter(const ParameterType type, const char shortName, std::string&& longName,
-                                         std::string&& description, const bool hasValue, std::optional<T>* value = nullptr)
+                                         std::string&& description, const bool hasValue, std::optional<T>* value)
     {
         checkParam<T>(type, value, longName);
         parameters.emplace_back(type, shortName, std::move(longName), std::move(description), false, hasValue, value);

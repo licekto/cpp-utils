@@ -161,12 +161,3 @@ TEST_CASE("Wrong type", "[ProgramOptions]")
     REQUIRE_THROWS_AS(programOptions.addOptionalParameter(CppUtils::ProgramOptions::ParameterType::Flag, 'f', "flag", "flag description", true, &intParam),
                       CppUtils::WrongParameterTypeException);
 }
-
-TEST_CASE("Missing variable", "[ProgramOptions]")
-{
-    CppUtils::ProgramOptions programOptions;
-    programOptions.addDescription("Test program");
-
-    REQUIRE_THROWS_AS(programOptions.addOptionalParameter<double>(CppUtils::ProgramOptions::ParameterType::Double, 'd', "double", "double description", true),
-                      CppUtils::MissingVariableException);
-}

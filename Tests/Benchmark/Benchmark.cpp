@@ -4,7 +4,7 @@
 #include <vector>
 
 #include <CppUtils/ObjectPool.hpp>
-#include <CppUtils/Utility.hpp>
+#include <CppUtils/Profile.hpp>
 
 #include "BoostObjectPool.hpp"
 #include "DefaultAllocator.hpp"
