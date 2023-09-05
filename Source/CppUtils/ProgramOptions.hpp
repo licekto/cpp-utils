@@ -9,31 +9,37 @@
 namespace CppUtils
 {
 
-class UnknownParameterException : public Exception
+class ProgramOptionsException : public Exception
+{
+public:
+    using Exception::Exception;
+};
+
+class UnknownParameterException : public ProgramOptionsException
 {
 public:
     explicit UnknownParameterException(const std::string& name);
 };
 
-class MissingParameterValueException : public Exception
+class MissingParameterValueException : public ProgramOptionsException
 {
 public:
     explicit MissingParameterValueException(const std::string& name);
 };
 
-class MissingMandatoryParametersException : public Exception
+class MissingMandatoryParametersException : public ProgramOptionsException
 {
 public:
     explicit MissingMandatoryParametersException(const std::vector<std::string>& missing);
 };
 
-class WrongParameterTypeException : public Exception
+class WrongParameterTypeException : public ProgramOptionsException
 {
 public:
     explicit WrongParameterTypeException(const std::string& expected, const std::string& actual);
 };
 
-class MissingVariableException : public Exception
+class MissingVariableException : public ProgramOptionsException
 {
 public:
     explicit MissingVariableException(const std::string& paramName);

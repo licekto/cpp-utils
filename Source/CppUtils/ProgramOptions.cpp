@@ -31,23 +31,23 @@ void setTargetValue(void* target, const T& value, const bool isMandatory)
 }
 
 UnknownParameterException::UnknownParameterException(const std::string& name)
-    : Exception("Parameter '" + name + "' is unknown")
+    : ProgramOptionsException("Parameter '" + name + "' is unknown")
 {}
 
 MissingParameterValueException::MissingParameterValueException(const std::string& name)
-    : Exception("Missing value for the '" + name + "' parameter")
+    : ProgramOptionsException("Missing value for the '" + name + "' parameter")
 {}
 
 MissingMandatoryParametersException::MissingMandatoryParametersException(const std::vector<std::string>& missing)
-    : Exception("Missing mandatory '" + Combinator(",").Combine(missing) + "' parameter")
+    : ProgramOptionsException("Missing mandatory '" + Combinator(",").Combine(missing) + "' parameter")
 {}
 
 WrongParameterTypeException::WrongParameterTypeException(const std::string& expected, const std::string& actual)
-    : Exception("Wrong parameter type, expected: '" + expected + "', actual: " + actual)
+    : ProgramOptionsException("Wrong parameter type, expected: '" + expected + "', actual: " + actual)
 {}
 
 MissingVariableException::MissingVariableException(const std::string& paramName)
-    : Exception("Missing variable for the '" + paramName + "' parameter")
+    : ProgramOptionsException("Missing variable for the '" + paramName + "' parameter")
 {}
 
 std::ostream& operator<<(std::ostream& os, const ProgramOptions& programOptions)
@@ -134,7 +134,7 @@ void ProgramOptions::Parameter::setValue(const std::string_view valueStr)
 
 std::ostream& operator<<(std::ostream& os, const ProgramOptions::Parameter& parameter)
 {
-    return os << "\t" << parameter.shortName << ", " << parameter.longName
+    return os << "\t-" << parameter.shortName << ", --" << parameter.longName
               << (parameter.isMandatory ? " (mandatory)" : "") << "\n"
               << "\t\t" << parameter.description;
 }
