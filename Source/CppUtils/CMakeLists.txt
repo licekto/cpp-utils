@@ -1,4 +1,4 @@
-﻿add_sources_to_list(SOURCES Exceptions.hpp
+﻿add_sources_to_list(SOURCES Exception.cpp Exception.hpp
                             FullEnum.cpp FullEnum.hpp
                             Logger.cpp Logger.hpp
                             LRUCache.hpp

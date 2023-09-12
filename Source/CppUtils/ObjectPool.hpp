@@ -4,31 +4,38 @@
 #include <variant>
 #include <vector>
 
-#include "Exceptions.hpp"
+#include "Exception.hpp"
 
 namespace CppUtils
 {
-class ObjectPoolMemoryException : public Exception
+
+class ObjectPoolException : public Exception
+{
+public:
+    using Exception::Exception;
+};
+
+class ObjectPoolMemoryException : public ObjectPoolException
 {
 public:
     ObjectPoolMemoryException(const void *objAddress)
-        : Exception("The object at address '" + ptrToString(objAddress) + "' is not managed by this object pool")
+        : ObjectPoolException("The object at address '" + ptrToString(objAddress) + "' is not managed by this object pool")
     {}
 };
 
-class ObjectPoolCapacityException : public Exception
+class ObjectPoolCapacityException : public ObjectPoolException
 {
 public:
     ObjectPoolCapacityException(const size_t capacity)
-        : Exception("The object pool's capacity=" + std::to_string(capacity) + " exceeded")
+        : ObjectPoolException("The object pool's capacity=" + std::to_string(capacity) + " exceeded")
     {}
 };
 
-class ObjectPoolDoubleFreeException : public Exception
+class ObjectPoolDoubleFreeException : public ObjectPoolException
 {
 public:
     ObjectPoolDoubleFreeException(const void *objectAddress)
-        : Exception("The object at address '" + ptrToString(objectAddress) + "' has already been freed")
+        : ObjectPoolException("The object at address '" + ptrToString(objectAddress) + "' has already been freed")
     {}
 };
 
@@ -144,4 +151,5 @@ private:
     /// Pointer to the currently available free frame
     PoolElement *firstAvailable;
 };
+
 }

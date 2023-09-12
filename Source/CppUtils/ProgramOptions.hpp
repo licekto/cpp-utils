@@ -4,7 +4,7 @@
 #include <optional>
 #include <vector>
 
-#include "Exceptions.hpp"
+#include "Exception.hpp"
 
 namespace CppUtils
 {

@@ -4,7 +4,7 @@
 #include <mutex>
 #include <random>
 
-#include "Exceptions.hpp"
+#include "Exception.hpp"
 
 namespace CppUtils
 {
