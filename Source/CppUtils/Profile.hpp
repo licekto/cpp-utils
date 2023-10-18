@@ -40,9 +40,17 @@ Stats calculateStats(const std::vector<UnitT>& measuredTimes)
 }
 
 template <typename UnitT, typename F>
-auto measure(const size_t iterations, F&& f)
+auto measure(const size_t iterations, const bool warmup, F&& f)
 {
-    std::vector<std::chrono::microseconds> measuredTimes;
+    std::vector<UnitT> measuredTimes;
+
+    if (warmup)
+    {
+        for (size_t i = 0; i < iterations / 10; ++i)
+        {
+            std::forward<F>(f)();
+        }
+    }
 
     for (size_t i = 0; i < iterations; ++i)
     {

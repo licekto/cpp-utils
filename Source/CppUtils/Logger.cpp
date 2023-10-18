@@ -5,13 +5,14 @@ namespace Logger
 
 LoggerException::LoggerException(std::string msg_)
     : CppUtils::CppUtilsException("Logger exception: '" + std::move(msg_) + "'")
-{
-}
+{}
 
 namespace Detail
 {
+
 namespace
 {
+
 static inline constexpr const char *LevelStrings[]{"DATA", "TRACE", "DEBUG", "INFO", "WARNING", "ERROR"};
 //static constexpr size_t LevelsCount = sizeof(LevelStrings) / sizeof(LevelStrings[0]);
 
@@ -113,9 +114,14 @@ void LoggerImpl::SetFile(std::string filename_)
     fileSet = true;
 }
 
+void LoggerImpl::Disable()
+{
+    disabled = true;
+}
+
 LoggerImpl::Line LoggerImpl::Log(const SourceLocation sourceLocation, const Level level)
 {
-    if (!fileSet)
+    if (!fileSet && !disabled)
     {
         throw LoggerException("The log file has not been set");
     }
@@ -145,6 +151,12 @@ void LoggerImpl::DumpLine(std::stringstream&& line)
         fileStream.flush();
     }
 }
+
+}
+
+void SetCurrentThreadName(const std::string &name)
+{
+    Detail::threadsNames[std::this_thread::get_id()] = name;
 }
 
 void SetLogFile(std::string filename)
@@ -152,8 +164,9 @@ void SetLogFile(std::string filename)
     Detail::logger.SetFile(std::move(filename));
 }
 
-void SetCurrentThreadName(const std::string &name)
+void Disable()
 {
-    Detail::threadsNames[std::this_thread::get_id()] = name;
+    Detail::logger.Disable();
 }
+
 }

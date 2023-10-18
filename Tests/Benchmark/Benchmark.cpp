@@ -25,7 +25,9 @@ CppUtils::Stats measureObjectPool(const size_t capacity, const size_t iterations
 {
     using TimeUnit = std::chrono::microseconds;
 
-    const auto times = CppUtils::measure<TimeUnit>(iterations, [&]()
+    const bool warmup = true;
+
+    const auto times = CppUtils::measure<TimeUnit>(iterations, warmup, [&]()
     {
         Allocator<T> allocator(capacity);
         std::vector<T*> objects;

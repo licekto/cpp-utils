@@ -116,6 +116,8 @@ public:
 
     void SetFile(std::string filename_);
 
+    void Disable();
+
     Line Log(const SourceLocation sourceLocation, const Level level);
 
 private:
@@ -125,16 +127,19 @@ private:
 
     std::string filename;
     bool fileSet = false;
+    bool disabled = false;
     std::ofstream fileStream;
     std::mutex mutex;
     size_t lineCounter{0};
 };
 
 inline LoggerImpl logger;
+
 }
 
 void SetCurrentThreadName(const std::string &name);
 void SetLogFile(std::string filename);
+void Disable();
 }
 
 #define log_on_level(level) for (bool tmp_ = Logger::Detail::enabledLevel(level); tmp_ != false; tmp_ = false) \
