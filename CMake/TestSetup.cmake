@@ -5,14 +5,14 @@ include(Catch)
 
 function(add_test_target)
     set(oneValueArgs TARGET)
-    set(multiValueArgs SOURCES COMPILER_FLAG INCLUDE_DIRS)
+    set(multiValueArgs SOURCES COMPILER_FLAGS INCLUDE_DIRS LIBRARIES)
     cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
     add_executable(${ARG_TARGET} ${ARG_SOURCES})
-    target_link_libraries(${ARG_TARGET} Catch2::Catch2)
+    target_link_libraries(${ARG_TARGET} Catch2::Catch2 ${ARG_LIBRARIES})
     setup_target(TARGET ${ARG_TARGET})
-    target_compile_options(${ARG_TARGET} PRIVATE ${ARG_COMPILER_FLAG})
-    target_link_options(${ARG_TARGET} PRIVATE "${ARG_COMPILER_FLAG}")
+    target_compile_options(${ARG_TARGET} PRIVATE ${ARG_COMPILER_FLAGS})
+    target_link_options(${ARG_TARGET} PRIVATE "${ARG_COMPILER_FLAGS}")
     target_include_directories(${ARG_TARGET} PRIVATE ${ARG_INCLUDE_DIRS})
 
     add_test(NAME ${ARG_TARGET} COMMAND ${ARG_TARGET})

@@ -15,7 +15,7 @@ function(setup_target)
     message("Setting up target " ${ARG_TARGET})
     target_precompile_headers(${ARG_TARGET} PRIVATE ${PRECOMPILED_HEADERS})
 
-    target_include_directories(${ARG_TARGET} PRIVATE ${CMAKE_BINARY_DIR}/generated/)
+    target_include_directories(${ARG_TARGET} PRIVATE ${CMAKE_BINARY_DIR}/generated)
     set_property(TARGET ${ARG_TARGET} PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
     target_link_libraries(${ARG_TARGET} Threads::Threads)
 endfunction()

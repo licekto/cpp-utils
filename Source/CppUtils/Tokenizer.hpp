@@ -4,6 +4,7 @@
 
 namespace CppUtils
 {
+
 class Tokenizer
 {
     using ValueType = std::string_view;
@@ -55,4 +56,5 @@ public:
 private:
     ValueType string, delims;
 };
+
 }

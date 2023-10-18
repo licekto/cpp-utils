@@ -1,8 +1,5 @@
 #include "Exception.hpp"
 
-namespace CppUtils
-{
-
 Exception::Exception(const std::string& message)
     : message(message)
 {}
@@ -18,5 +15,12 @@ std::string Exception::ptrToString(const void *ptr)
     ss << ptr;
     return ss.str();
 }
+
+namespace CppUtils
+{
+
+CppUtilsException::CppUtilsException(const std::string& message)
+    : Exception("CppUtilsException: " + message)
+{}
 
 }

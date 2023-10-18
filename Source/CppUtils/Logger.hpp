@@ -1,6 +1,6 @@
 #pragma once
 
-#include "LogLevel.hpp"
+#include <LogLevel.hpp>
 
 #include <fstream>
 #include <mutex>
@@ -12,18 +12,16 @@
 #include <thread>
 #include <unordered_map>
 
+#include "Exception.hpp"
+
 //#include <boost/lockfree/spsc_queue.hpp>
 
 namespace Logger
 {
-class LoggerException : std::exception
+class LoggerException : public CppUtils::CppUtilsException
 {
 public:
-    LoggerException(const std::string& msg_);
-    const char * what() const noexcept override;
-
-private:
-    std::string msg;
+    LoggerException(std::string msg);
 };
 
 /**
@@ -31,11 +29,12 @@ private:
  */
 enum class Level
 {
-    Trace = 0, /// Trace level
-    Debug = 1, /// Debug level
-    Info = 2, /// Info level
-    Warning = 3, /// Warning level
-    Error = 4 /// Error level
+    Data = 0, /// Data level - prints contents of variables etc.
+    Trace = 1, /// Trace level
+    Debug = 2, /// Debug level
+    Info = 3, /// Info level
+    Warning = 4, /// Warning level
+    Error = 5 /// Error level
 };
 
 namespace Detail
@@ -141,6 +140,7 @@ void SetLogFile(std::string filename);
 #define log_on_level(level) for (bool tmp_ = Logger::Detail::enabledLevel(level); tmp_ != false; tmp_ = false) \
     Logger::Detail::logger.Log(Logger::Detail::getSourceLocation(__FILE__, __FUNCTION__, __LINE__), level)
 
+#define log_data log_on_level(Logger::Level::Data)
 #define log_trace log_on_level(Logger::Level::Trace)
 #define log_debug log_on_level(Logger::Level::Debug)
 #define log_info log_on_level(Logger::Level::Info)

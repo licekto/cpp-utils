@@ -3,21 +3,16 @@
 namespace Logger
 {
 
-LoggerException::LoggerException(const std::string &msg_)
-    : msg("Logger exception: '" + std::move(msg_) + "'")
+LoggerException::LoggerException(std::string msg_)
+    : CppUtils::CppUtilsException("Logger exception: '" + std::move(msg_) + "'")
 {
-}
-
-const char *LoggerException::what() const noexcept
-{
-    return msg.c_str();
 }
 
 namespace Detail
 {
 namespace
 {
-static inline constexpr const char *LevelStrings[]{"TRACE", "DEBUG", "INFO", "WARNING", "ERROR"};
+static inline constexpr const char *LevelStrings[]{"DATA", "TRACE", "DEBUG", "INFO", "WARNING", "ERROR"};
 //static constexpr size_t LevelsCount = sizeof(LevelStrings) / sizeof(LevelStrings[0]);
 
 static constexpr const char *levelToString(const Level level)

@@ -4,7 +4,7 @@ namespace CppUtils
 {
 
 WrongRandomRange::WrongRandomRange(const std::string& from, const std::string& to)
-    : Exception("Wrong range: from=" + from + " - to=" + to)
+    : CppUtilsException("Wrong range: from=" + from + " - to=" + to)
 {}
 
 RandomStringGenerator::RandomStringGenerator(const size_t sizeFrom, const size_t sizeTo, const std::string charSet)

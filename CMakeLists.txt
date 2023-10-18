@@ -11,6 +11,12 @@ set(LOG_LEVEL Info)
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     set(LOG_LEVEL Trace)
 endif()
+
+if(DEFINED CUSTOM_LOG_LEVEL)
+    message("LOG_LEVEL set to '" ${CUSTOM_LOG_LEVEL} "'")
+    set(LOG_LEVEL ${CUSTOM_LOG_LEVEL})
+endif()
+
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Source/CppUtils/LogLevel.hpp.in ${CMAKE_BINARY_DIR}/generated/LogLevel.hpp)
 
 include(Compiler)

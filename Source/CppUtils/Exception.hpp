@@ -3,9 +3,6 @@
 #include <stdexcept>
 #include <sstream>
 
-namespace CppUtils
-{
-
 class Exception : public std::exception
 {
 public:
@@ -17,6 +14,15 @@ protected:
 
 private:
     const std::string message;
+};
+
+namespace CppUtils
+{
+
+class CppUtilsException : public Exception
+{
+public:
+    CppUtilsException(const std::string& message);
 };
 
 }

@@ -49,3 +49,5 @@ if(CPPCHECK)
 endif()
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+message("### Build type: '" ${CMAKE_BUILD_TYPE} "'")

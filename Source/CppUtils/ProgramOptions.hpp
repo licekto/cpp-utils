@@ -9,10 +9,10 @@
 namespace CppUtils
 {
 
-class ProgramOptionsException : public Exception
+class ProgramOptionsException : public CppUtilsException
 {
 public:
-    using Exception::Exception;
+    using CppUtilsException::CppUtilsException;
 };
 
 class UnknownParameterException : public ProgramOptionsException

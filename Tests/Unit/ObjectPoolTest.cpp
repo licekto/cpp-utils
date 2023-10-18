@@ -21,7 +21,7 @@ TEST_CASE("ObjectPool - base cases", "[ObjectPool]")
     }
 
     using Catch::Matchers::Contains;
-    REQUIRE_THROWS_WITH(objectPool.Alloc(), "The object pool's capacity=" + std::to_string(capacity) + " exceeded");
+    REQUIRE_THROWS_WITH(objectPool.Alloc(), "CppUtilsException: The object pool's capacity=" + std::to_string(capacity) + " exceeded");
 
     for (size_t i = 0; i < 5; ++i)
     {
@@ -31,7 +31,7 @@ TEST_CASE("ObjectPool - base cases", "[ObjectPool]")
         REQUIRE_THROWS_WITH(objectPool.Free(obj), Contains("The object at address '") && Contains("' has already been freed"));
     }
 
-    REQUIRE_THROWS_WITH(objectPool.Free(nullptr), "The object at address '0' is not managed by this object pool");
+    REQUIRE_THROWS_WITH(objectPool.Free(nullptr), "CppUtilsException: The object at address '0' is not managed by this object pool");
 
     uint32_t *ptr = new uint32_t;
     REQUIRE_THROWS_WITH(objectPool.Free(ptr), Contains("The object at address '") && Contains("' is not managed by this object pool"));

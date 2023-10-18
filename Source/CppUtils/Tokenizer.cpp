@@ -4,6 +4,7 @@
 
 namespace CppUtils
 {
+
 Tokenizer::ConstIterator Tokenizer::ConstIterator::create_end(const Tokenizer *_tokenizer)
 {
     ConstIterator it(_tokenizer);
@@ -84,4 +85,5 @@ Tokenizer::ConstIterator Tokenizer::cend() const noexcept
 {
     return end();
 }
+
 }

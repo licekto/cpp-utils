@@ -9,10 +9,10 @@
 namespace CppUtils
 {
 
-class ObjectPoolException : public Exception
+class ObjectPoolException : public CppUtilsException
 {
 public:
-    using Exception::Exception;
+    using CppUtilsException::CppUtilsException;
 };
 
 class ObjectPoolMemoryException : public ObjectPoolException

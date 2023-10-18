@@ -9,7 +9,7 @@
 namespace CppUtils
 {
 
-class WrongRandomRange : public Exception
+class WrongRandomRange : public CppUtilsException
 {
 public:
     WrongRandomRange(const std::string& from, const std::string& to);
